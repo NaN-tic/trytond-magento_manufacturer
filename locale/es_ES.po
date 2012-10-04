@@ -1,0 +1,79 @@
+# 
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "error:magento.app:"
+msgid "Not exist manufacturer attribute!"
+msgstr "No existe el atributo del fabricante."
+
+msgctxt "field:magento.app,manufacturer_name:"
+msgid "Manufacturer"
+msgstr "Fabricante"
+
+msgctxt "field:magento.manufacturer,create_date:"
+msgid "Create Date"
+msgstr "Fecha de creación"
+
+msgctxt "field:magento.manufacturer,create_uid:"
+msgid "Create User"
+msgstr "Usuario de creación"
+
+msgctxt "field:magento.manufacturer,id:"
+msgid "ID"
+msgstr "ID"
+
+msgctxt "field:magento.manufacturer,label:"
+msgid "Label"
+msgstr "Etiqueta"
+
+msgctxt "field:magento.manufacturer,magento_app:"
+msgid "Magento App"
+msgstr "Magento App"
+
+msgctxt "field:magento.manufacturer,manufacturer:"
+msgid "Manufacturer"
+msgstr "Fabricante"
+
+msgctxt "field:magento.manufacturer,rec_name:"
+msgid "Name"
+msgstr "Nombre"
+
+msgctxt "field:magento.manufacturer,value:"
+msgid "ID"
+msgstr "ID"
+
+msgctxt "field:magento.manufacturer,write_date:"
+msgid "Write Date"
+msgstr "Fecha modificación"
+
+msgctxt "field:magento.manufacturer,write_uid:"
+msgid "Write User"
+msgstr "Usuario modificación"
+
+msgctxt "help:magento.app,manufacturer_name:"
+msgid "Manufacturer attribute name"
+msgstr "Nombre atributo fabricante"
+
+msgctxt "model:ir.action,name:act_magento_manufacturer_form"
+msgid "Magento Manufacturer"
+msgstr "Fabricante Magento"
+
+msgctxt "model:ir.ui.menu,name:menu_magento_manufacturer_form"
+msgid "Magento Manufacturer"
+msgstr "Fabricante Magento"
+
+msgctxt "model:magento.manufacturer,name:"
+msgid "Magento Manufacturer"
+msgstr "Fabricante Magento"
+
+msgctxt "view:magento.app:"
+msgid "Import Magento Manufacturer"
+msgstr "Importar fabricantes de Magento"
+
+msgctxt "view:magento.app:"
+msgid "Manufacturer"
+msgstr "Fabricante"
+
+msgctxt "view:magento.manufacturer:"
+msgid "Magento Manufacturer"
+msgstr "Fabricante Magento"

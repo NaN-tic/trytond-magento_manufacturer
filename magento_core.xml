@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<!-- This file is part magento_manufacturer module for Tryton.
+The COPYRIGHT file at the top level of this repository contains the full copyright notices and license terms. -->
+<tryton>
+    <data>
+        <!--Magento APP -->
+        <record model="ir.ui.view" id="magento_app_form">
+            <field name="model">magento.app</field>
+            <field name="inherit" ref="magento.magento_app_form"/>
+            <field name="arch" type="xml">
+                <![CDATA[
+                <data>
+                    <xpath
+                        expr="/form/notebook/page[@id='general']/field[@name='request_group']"
+                        position="after">
+                            <label name="manufacturer_name"/>
+                            <field name="manufacturer_name"/>
+                    </xpath>
+                    <xpath
+                        expr="/form/notebook/page[@id='import']/button[@name='core_customer_group']"
+                        position="after">
+                            <separator string="Manufacturer" colspan="4" id="manufacturer"/>
+                            <button name="core_manufacturer" string="Import Magento Manufacturer" type="object" colspan="4"/>
+                    </xpath>
+                </data>
+                ]]>
+            </field>
+        </record>
+
+        <!--Magento Manufacturer -->
+        <record model="ir.ui.view" id="magento_manufacturer_form">
+            <field name="model">magento.manufacturer</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <![CDATA[
+                <form string="Magento Manufacturer" col="4">
+                    <label name="magento_app"/>
+                    <field name="magento_app"/>
+                    <label name="manufacturer"/>
+                    <field name="manufacturer"/>
+                    <label name="value"/>
+                    <field name="value"/>
+                    <label name="label"/>
+                    <field name="label"/>
+                </form>
+                ]]>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="magento_manufacturer_tree">
+            <field name="model">magento.manufacturer</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <![CDATA[
+                <tree string="Magento Manufacturer">
+                    <field name="magento_app"/>
+                    <field name="manufacturer"/>
+                    <field name="value"/>
+                    <field name="label"/>
+                </tree>
+                ]]>
+            </field>
+        </record>
+        <record model="ir.model.access" id="access_magento_manufacturer">
+            <field name="model" search="[('model', '=', 'magento.manufacturer')]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_delete" eval="False"/>
+        </record>
+        <record model="ir.action.act_window" id="act_magento_manufacturer_form">
+            <field name="name">Magento Manufacturer</field>
+            <field name="res_model">magento.manufacturer</field>
+        </record>
+        <record model="ir.action.act_window.view" id="act_magento_manufacturer_form_view1">
+            <field name="sequence" eval="10"/>
+            <field name="view" ref="magento_manufacturer_tree"/>
+            <field name="act_window" ref="act_magento_manufacturer_form"/>
+        </record>
+        <record model="ir.action.act_window.view" id="act_magento_manufacturer_form_view2">
+            <field name="sequence" eval="20"/>
+            <field name="view" ref="magento_manufacturer_form"/>
+            <field name="act_window" ref="act_magento_manufacturer_form"/>
+        </record>
+        <menuitem parent="magento.menu_magento" action="act_magento_manufacturer_form"
+            id="menu_magento_manufacturer_form" sequence="10"/>
+
+    </data>
+</tryton>
