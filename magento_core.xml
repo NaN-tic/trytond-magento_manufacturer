@@ -20,7 +20,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
                         expr="/form/notebook/page[@id='import']/button[@name='core_customer_group']"
                         position="after">
                             <separator string="Manufacturer" colspan="4" id="manufacturer"/>
-                            <button name="core_manufacturer" string="Import Magento Manufacturer" type="object" colspan="4"/>
+                            <button name="core_manufacturer" string="Import Magento Manufacturer" colspan="4"/>
                     </xpath>
                 </data>
                 ]]>

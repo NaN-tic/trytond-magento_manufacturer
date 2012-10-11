@@ -5,37 +5,41 @@
 from trytond.model import ModelView, ModelSQL, fields
 from trytond.tools import safe_eval, datetime_strftime
 from trytond.transaction import Transaction
-from trytond.pool import Pool
+from trytond.pool import Pool, PoolMeta
 
 from magento import *
 import logging
 
-class MagentoApp(ModelSQL, ModelView):
-    _name = 'magento.app'
-    _description = __doc__
+__all__ = ['MagentoApp', 'MagentoManufacturer']
+__metaclass__ = PoolMeta
+
+class MagentoApp:
+    __name__ = 'magento.app'
 
     manufacturer_name = fields.Char('Manufacturer',
         help='Manufacturer attribute name')
 
-    def __init__(self):
-        super(MagentoApp, self).__init__()
-        self._error_messages.update({
+    @classmethod
+    def __setup__(cls):
+        super(MagentoApp, cls).__setup__()
+        cls._error_messages.update({
             'manufacturer_error': 'Not exist manufacturer attribute!',
         })
-        self._buttons.update({
+        cls._buttons.update({
                 'core_manufacturer': {},
                 })
 
+    @classmethod
     @ModelView.button
-    def core_manufacturer(self, ids):
+    def core_manufacturer(self, apps):
         """Import Manufacturers from Magento to Tryton
         Get if this manufacturer exists by name
         :return True
         """
-        party_obj = Pool().get('party.party')
-        manufacturer_obj = Pool().get('magento.manufacturer')
+        Party = Pool().get('party.party')
+        Manufacturer = Pool().get('magento.manufacturer')
 
-        for app in self.browse(ids):
+        for app in apps:
             with ProductAttribute(app.uri,app.username,app.password) as  product_attribute_api:
                 manufacturer = app.manufacturer_name or 'manufacturer'
                 try:
@@ -47,7 +51,7 @@ class MagentoApp(ModelSQL, ModelView):
                     partner = False
 
                     #check if this manufacturer attribute exists in magento.manufacturer
-                    manufacturers = manufacturer_obj.search([
+                    manufacturers = Manufacturer.search([
                                             ('magento_app','=', app.id),
                                             ('value','=', option['value']),
                                             ])
@@ -59,7 +63,7 @@ class MagentoApp(ModelSQL, ModelView):
                         continue
 
                     #search manufacturer in party or create new party
-                    partners = party_obj.search([
+                    partners = Party.search([
                                             ('name','=',option['label']),
                                             ('manufacturer','=', True),
                                             ])
@@ -71,7 +75,7 @@ class MagentoApp(ModelSQL, ModelView):
                                 'name': option['label'],
                                 'manufacturer': True,
                             }
-                            partner = party_obj.create(vals)
+                            partner = Party.create(vals)
                         else:
                             continue
 
@@ -83,26 +87,19 @@ class MagentoApp(ModelSQL, ModelView):
                             'value': option['value'],
                             'label': option['label'],
                         }
-                        manufacturer_obj.create(vals)
+                        Manufacturer.create(vals)
                         logging.getLogger('magento').info(
                             'Manufacturer %s. Party %s.' %
                             (option['label'], partner)
                             )
 
-        return True
-
-MagentoApp()
-
 
 class MagentoManufacturer(ModelSQL, ModelView):
     'Magento Manufacturer'
-    _name = 'magento.manufacturer'
-    _description = __doc__
+    __name__ = 'magento.manufacturer'
 
     magento_app = fields.Many2One('magento.app','Magento App', required=True)
     manufacturer = fields.Many2One('party.party', 'Manufacturer', required=True, 
         ondelete='CASCADE')
     value = fields.Char('ID', required=True)
     label = fields.Char('Label', required=True)
-
-MagentoManufacturer()
