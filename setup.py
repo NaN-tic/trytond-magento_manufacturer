@@ -33,14 +33,14 @@ setup(name='trytonzz_magento_manufacturer',
     author='Zikzakmedia SL',
     author_email='zikzak@zikzakmedia.com',
     url='http://www.zikzakmedia.com',
-    download_url="https://bitbucket.org/zikzakmedia/trytonzz-magento_manufacturer",
-    package_dir={'trytonzz.modules.magento_manufacturer': '.'},
+    download_url="https://bitbucket.org/zikzakmedia/trytond-magento_manufacturer",
+    package_dir={'trytond.modules.magento_manufacturer': '.'},
     packages=[
-        'trytonzz.modules.magento_manufacturer',
-        'trytonzz.modules.magento_manufacturer.tests',
+        'trytond.modules.magento_manufacturer',
+        'trytond.modules.magento_manufacturer.tests',
     ],
     package_data={
-        'trytonzz.modules.magento_manufacturer': info.get('xml', []) \
+        'trytond.modules.magento_manufacturer': info.get('xml', []) \
             + ['tryton.cfg', 'locale/*.po'],
     },
     classifiers=[
@@ -63,9 +63,9 @@ setup(name='trytonzz_magento_manufacturer',
     install_requires=requires,
     zip_safe=False,
     entry_points="""
-    [trytonzz.modules]
-    magento_manufacturer = trytonzz.modules.magento_manufacturer
+    [trytond.modules]
+    magento_manufacturer = trytond.modules.magento_manufacturer
     """,
     test_suite='tests',
-    test_loader='trytonzz.test_loader:Loader',
+    test_loader='trytond.test_loader:Loader',
 )
