@@ -39,6 +39,7 @@ class MagentoApp:
         Party = Pool().get('party.party')
         Manufacturer = Pool().get('magento.manufacturer')
 
+        to_create = []
         for app in apps:
             with ProductAttribute(app.uri,app.username,app.password) as  product_attribute_api:
                 manufacturer = app.manufacturer_name or 'manufacturer'
@@ -75,23 +76,24 @@ class MagentoApp:
                                 'name': option['label'],
                                 'manufacturer': True,
                             }
-                            partner = Party.create(vals)
+                            partner = Party.create([vals])[0]
                         else:
                             continue
 
                     #create new manufacturer
                     if partner:
-                        vals = {
+                        to_create.append({
                             'magento_app': app.id,
                             'manufacturer': partner,
                             'value': option['value'],
                             'label': option['label'],
-                        }
-                        Manufacturer.create(vals)
+                        })
                         logging.getLogger('magento').info(
                             'Manufacturer %s. Party %s.' %
                             (option['label'], partner)
                             )
+        if to_create:
+            Manufacturer.create(to_create)
 
 
 class MagentoManufacturer(ModelSQL, ModelView):
