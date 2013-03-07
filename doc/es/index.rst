@@ -32,8 +32,8 @@ fabricantes de Tryton a Magento, deberá crear los fabricantes manualmente en
 Magento e importarlos posteriormente a Tryton tal y como se describe en el
 apartado anterior.
 
-Módulos que dependen
-====================
+Módulos de los que depende
+==========================
 
 Instalados
 ----------
