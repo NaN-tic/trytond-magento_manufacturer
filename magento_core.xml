@@ -7,58 +7,19 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
         <record model="ir.ui.view" id="magento_app_form">
             <field name="model">magento.app</field>
             <field name="inherit" ref="magento.magento_app_form"/>
-            <field name="arch" type="xml">
-                <![CDATA[
-                <data>
-                    <xpath
-                        expr="/form/notebook/page[@id='general']/field[@name='request_group']"
-                        position="after">
-                            <label name="manufacturer_name"/>
-                            <field name="manufacturer_name"/>
-                    </xpath>
-                    <xpath
-                        expr="/form/notebook/page[@id='import']/button[@name='core_customer_group']"
-                        position="after">
-                            <separator string="Manufacturer" colspan="4" id="manufacturer"/>
-                            <button name="core_manufacturer" string="Import Magento Manufacturer" colspan="4"/>
-                    </xpath>
-                </data>
-                ]]>
-            </field>
+            <field name="name">magento_app_form</field>
         </record>
 
         <!--Magento Manufacturer -->
         <record model="ir.ui.view" id="magento_manufacturer_form">
             <field name="model">magento.manufacturer</field>
             <field name="type">form</field>
-            <field name="arch" type="xml">
-                <![CDATA[
-                <form string="Magento Manufacturer" col="4">
-                    <label name="magento_app"/>
-                    <field name="magento_app"/>
-                    <label name="manufacturer"/>
-                    <field name="manufacturer"/>
-                    <label name="value"/>
-                    <field name="value"/>
-                    <label name="label"/>
-                    <field name="label"/>
-                </form>
-                ]]>
-            </field>
+            <field name="name">magento_manufacturer_form</field>
         </record>
         <record model="ir.ui.view" id="magento_manufacturer_tree">
             <field name="model">magento.manufacturer</field>
             <field name="type">tree</field>
-            <field name="arch" type="xml">
-                <![CDATA[
-                <tree string="Magento Manufacturer">
-                    <field name="magento_app"/>
-                    <field name="manufacturer"/>
-                    <field name="value"/>
-                    <field name="label"/>
-                </tree>
-                ]]>
-            </field>
+            <field name="name">magento_manufacturer_tree</field>
         </record>
         <record model="ir.model.access" id="access_magento_manufacturer">
             <field name="model" search="[('model', '=', 'magento.manufacturer')]"/>
@@ -83,6 +44,5 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
         </record>
         <menuitem parent="magento.menu_magento" action="act_magento_manufacturer_form"
             id="menu_magento_manufacturer_form" sequence="10"/>
-
     </data>
 </tryton>
