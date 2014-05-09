@@ -10,6 +10,7 @@ import logging
 __all__ = ['MagentoApp', 'MagentoManufacturer']
 __metaclass__ = PoolMeta
 
+
 class MagentoApp:
     __name__ = 'magento.app'
 
@@ -46,14 +47,14 @@ class MagentoApp:
                     self.raise_user_error('connection_successfully')
 
                 for option in attribute_options:
-                    partner = False
+                    partner = None
 
                     #check if this manufacturer attribute exists in magento.manufacturer
                     manufacturers = Manufacturer.search([
-                                            ('magento_app','=', app.id),
-                                            ('value','=', option['value']),
-                                            ])
-                    if len(manufacturers)>0:
+                                    ('magento_app','=', app.id),
+                                    ('value','=', option['value']),
+                                    ], limit=1)
+                    if manufacturers:
                         logging.getLogger('magento').info(
                             'Skip! Manufacturer %s is already exists Magento APP %s.' %
                             (option['label'],  app.name)
@@ -62,13 +63,13 @@ class MagentoApp:
 
                     #search manufacturer in party or create new party
                     partners = Party.search([
-                                            ('name','=',option['label']),
-                                            ('manufacturer','=', True),
-                                            ])
-                    if len(partners)>0:
-                        partner = partners[0]
+                                    ('name','=',option['label']),
+                                    ('manufacturer','=', True),
+                                    ])
+                    if partners:
+                        partner, = partners
                     else:
-                        if option.get('value',False):
+                        if option.get('value', False):
                             vals = {
                                 'name': option['label'],
                                 'manufacturer': True,
