@@ -12,11 +12,11 @@ msgstr "Fabricant"
 
 msgctxt "field:magento.manufacturer,create_date:"
 msgid "Create Date"
-msgstr "Fecha creación"
+msgstr "Data creació"
 
 msgctxt "field:magento.manufacturer,create_uid:"
 msgid "Create User"
-msgstr "Usuario creación"
+msgstr "Usuari creació"
 
 msgctxt "field:magento.manufacturer,id:"
 msgid "ID"
@@ -44,11 +44,11 @@ msgstr "ID"
 
 msgctxt "field:magento.manufacturer,write_date:"
 msgid "Write Date"
-msgstr "Fecha modificación"
+msgstr "Data modificació"
 
 msgctxt "field:magento.manufacturer,write_uid:"
 msgid "Write User"
-msgstr "Usuario modificación"
+msgstr "Usuari modificació"
 
 msgctxt "help:magento.app,manufacturer_name:"
 msgid "Manufacturer attribute name"
