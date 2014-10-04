@@ -1,5 +1,5 @@
 #This file is part magento_manufacturer module for Tryton.
-#The COPYRIGHT file at the top level of this repository contains 
+#The COPYRIGHT file at the top level of this repository contains
 #the full copyright notices and license terms.
 from trytond.model import ModelView, ModelSQL, fields
 from trytond.pool import Pool, PoolMeta
@@ -39,32 +39,33 @@ class MagentoApp:
 
         to_create = []
         for app in apps:
-            with ProductAttribute(app.uri,app.username,app.password) as  product_attribute_api:
+            with ProductAttribute(app.uri, app.username, app.password) as \
+                    product_attribute_api:
                 manufacturer = app.manufacturer_name or 'manufacturer'
                 try:
-                    attribute_options = product_attribute_api.options(manufacturer)
+                    attribute_options = product_attribute_api.options(
+                        manufacturer)
                 except:
                     self.raise_user_error('connection_successfully')
 
                 for option in attribute_options:
                     partner = None
 
-                    #check if this manufacturer attribute exists in magento.manufacturer
+                    #check if this manufacturer attribute exists
                     manufacturers = Manufacturer.search([
-                                    ('magento_app','=', app.id),
-                                    ('value','=', option['value']),
+                                    ('magento_app', '=', app.id),
+                                    ('value', '=', option['value']),
                                     ], limit=1)
                     if manufacturers:
-                        logging.getLogger('magento').info(
-                            'Skip! Manufacturer %s is already exists Magento APP %s.' %
-                            (option['label'],  app.name)
-                            )
+                        logging.getLogger('magento').info('Skip! Manufacturer '
+                            '%s is already exists Magento APP %s.' %
+                            (option['label'], app.name))
                         continue
 
                     #search manufacturer in party or create new party
                     partners = Party.search([
-                                    ('name','=',option['label']),
-                                    ('manufacturer','=', True),
+                                    ('name', '=', option['label']),
+                                    ('manufacturer', '=', True),
                                     ])
                     if partners:
                         partner, = partners
@@ -98,8 +99,8 @@ class MagentoManufacturer(ModelSQL, ModelView):
     'Magento Manufacturer'
     __name__ = 'magento.manufacturer'
 
-    magento_app = fields.Many2One('magento.app','Magento App', required=True)
-    manufacturer = fields.Many2One('party.party', 'Manufacturer', required=True, 
-        ondelete='CASCADE')
+    magento_app = fields.Many2One('magento.app', 'Magento App', required=True)
+    manufacturer = fields.Many2One('party.party', 'Manufacturer',
+        required=True, ondelete='CASCADE')
     value = fields.Char('ID', required=True)
     label = fields.Char('Label', required=True)

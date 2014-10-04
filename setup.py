@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #This file is part magento_manufacturer module for Tryton.
-#The COPYRIGHT file at the top level of this repository contains 
+#The COPYRIGHT file at the top level of this repository contains
 #the full copyright notices and license terms.
 
 from setuptools import setup
@@ -11,6 +11,7 @@ import ConfigParser
 MODULE = 'magento_manufacturer'
 PREFIX = 'trytonzz'
 MODULE2PREFIX = {}
+
 
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
@@ -44,7 +45,8 @@ setup(name='%s_%s' % (PREFIX, MODULE),
     author='Zikzakmedia SL',
     author_email='zikzak@zikzakmedia.com',
     url='http://www.zikzakmedia.com',
-    download_url="https://bitbucket.org/zikzakmedia/trytond-magento_manufacturer",
+    download_url=
+        "https://bitbucket.org/zikzakmedia/trytond-magento_manufacturer",
     package_dir={'trytond.modules.%s' % MODULE: '.'},
     packages=[
         'trytond.modules.%s' % MODULE,
