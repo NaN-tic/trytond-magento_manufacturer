@@ -46,7 +46,7 @@ class MagentoApp:
                     attribute_options = product_attribute_api.options(
                         manufacturer)
                 except:
-                    self.raise_user_error('connection_successfully')
+                    self.raise_user_error('manufacturer_error')
 
                 for option in attribute_options:
                     partner = None
