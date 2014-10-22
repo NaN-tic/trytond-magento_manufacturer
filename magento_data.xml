@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!-- This file is part magento_manufacturer module for Tryton.
+The COPYRIGHT file at the top level of this repository contains the full copyright notices and license terms. -->
+<tryton>
+    <!-- Base External Mapping Lines -->
+    <data noupdate="1" skiptest="1" grouped="1">
+        <!-- Template -->
+        <record model="base.external.mapping.line" id="magento_base_external_mapping_line_manufacturer">
+            <field name="mapping" ref="magento_product.magento_base_external_mapping_template"/>
+            <field name="field" search="[('model.model', '=', 'product.template'), ('name', '=', 'manufacturer')]"/>
+            <field name="external_field">manufacturer</field>
+            <field name="mapping_type">in_out</field>
+            <field name="external_type">str</field>
+            <field name="active">True</field>
+            <field name="in_function">MagentoManufacturer = pool.get('magento.manufacturer')
+manufacturers = MagentoManufacturer.search([('magento_app','=', 1),('value','=', value)], limit=1)
+if manufacturers:
+    mgn_manufacturer, = manufacturers
+    result = mgn_manufacturer.manufacturer
+else:
+    result = None</field>
+            <field name="out_function">Template = pool.get('product.template')
+MagentoManufacturer = pool.get('magento.manufacturer')
+
+result = ''
+product, = Template.read([record], ['manufacturer'])
+manufacturer = product['manufacturer']
+
+if manufacturer:
+    manus = MagentoManufacturer.search([('manufacturer','=',manufacturer)], limit=1)
+    if manus:
+        manufacturer, = MagentoManufacturer.read(manus, ['value'])
+        print manufacturer
+        result = manufacturer['value']</field>
+        </record>
+    </data>
+</tryton>
