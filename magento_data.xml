@@ -30,7 +30,6 @@ if manufacturer:
     manus = MagentoManufacturer.search([('manufacturer','=',manufacturer)], limit=1)
     if manus:
         manufacturer, = MagentoManufacturer.read(manus, ['value'])
-        print manufacturer
         result = manufacturer['value']</field>
         </record>
     </data>
