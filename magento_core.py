@@ -66,7 +66,7 @@ class MagentoApp:
                     partners = Party.search([
                                     ('name', '=', option['label']),
                                     ('manufacturer', '=', True),
-                                    ])
+                                    ], limit=1)
                     if partners:
                         partner, = partners
                     else:
