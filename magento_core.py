@@ -3,12 +3,13 @@
 # the full copyright notices and license terms.
 from trytond.model import ModelView, ModelSQL, fields
 from trytond.pool import Pool, PoolMeta
-
 from magento import *
 import logging
 
 __all__ = ['MagentoApp', 'MagentoManufacturer']
 __metaclass__ = PoolMeta
+
+logger = logging.getLogger(__name__)
 
 
 class MagentoApp:
@@ -57,7 +58,7 @@ class MagentoApp:
                                     ('value', '=', option['value']),
                                     ], limit=1)
                     if manufacturers:
-                        logging.getLogger('magento').info('Skip! Manufacturer '
+                        logger.info('Skip! Manufacturer '
                             '%s is already exists Magento APP %s.' %
                             (option['label'], app.name))
                         continue
@@ -87,7 +88,7 @@ class MagentoApp:
                             'value': option['value'],
                             'label': option['label'],
                         })
-                        logging.getLogger('magento').info(
+                        logger.info(
                             'Manufacturer %s. Party %s.' %
                             (option['label'], partner)
                             )
