@@ -17,13 +17,14 @@ class Product:
         vals = super(Product, cls).magento_import_product(values, shop)
 
         manufacturer = values.get('manufacturer')
-        manufacturers = MagentoManufacturer.search([
-            ('value','=', manufacturer),
-            ], limit=1)
-    
-        if manufacturers:
-            mgn_manufacturer, = manufacturers
-            vals['manufacturer'] = mgn_manufacturer.manufacturer
+        if manufacturer:
+            manufacturers = MagentoManufacturer.search([
+                ('value','=', manufacturer),
+                ], limit=1)
+        
+            if manufacturers:
+                mgn_manufacturer, = manufacturers
+                vals['manufacturer'] = mgn_manufacturer.manufacturer
         return vals
 
     @classmethod
