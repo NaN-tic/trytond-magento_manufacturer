@@ -7,12 +7,12 @@ from magento import *
 import logging
 
 __all__ = ['MagentoApp', 'MagentoManufacturer']
-__metaclass__ = PoolMeta
 
 logger = logging.getLogger(__name__)
 
 
 class MagentoApp:
+    __metaclass__ = PoolMeta
     __name__ = 'magento.app'
 
     manufacturer_name = fields.Char('Manufacturer',
