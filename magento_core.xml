@@ -10,6 +10,13 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
             <field name="name">magento_app_form</field>
         </record>
 
+        <!-- buttons -->
+        <record model="ir.model.button" id="core_manufacturer_button">
+            <field name="name">core_manufacturer</field>
+            <field name="string">Import Magento Manufacturer</field>
+            <field name="model" search="[('model', '=', 'magento.app')]"/>
+        </record>
+
         <!--Magento Manufacturer -->
         <record model="ir.ui.view" id="magento_manufacturer_form">
             <field name="model">magento.manufacturer</field>

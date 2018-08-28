@@ -13,11 +13,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
         position="after">
         <page string="Manufacturer" id="manufacturer">
             <separator string="Manufacturer" colspan="4" id="manufacturer"/>
-            <button name="core_manufacturer" string="Import Magento Manufacturer" colspan="4"/>
+            <button name="core_manufacturer" colspan="4"/>
         </page>
     </xpath>
 </data>
-
-
-
-
