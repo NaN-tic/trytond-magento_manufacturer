@@ -11,10 +11,8 @@ __all__ = ['MagentoApp', 'MagentoManufacturer']
 logger = logging.getLogger(__name__)
 
 
-class MagentoApp:
-    __metaclass__ = PoolMeta
+class MagentoApp(metaclass=PoolMeta):
     __name__ = 'magento.app'
-
     manufacturer_name = fields.Char('Manufacturer',
         help='Manufacturer attribute name')
 
@@ -99,7 +97,6 @@ class MagentoApp:
 class MagentoManufacturer(ModelSQL, ModelView):
     'Magento Manufacturer'
     __name__ = 'magento.manufacturer'
-
     magento_app = fields.Many2One('magento.app', 'Magento App', required=True)
     manufacturer = fields.Many2One('party.party', 'Manufacturer',
         required=True, ondelete='CASCADE')

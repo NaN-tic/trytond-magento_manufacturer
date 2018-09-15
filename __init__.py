@@ -2,12 +2,12 @@
 # The COPYRIGHT file at the top level of this repository contains
 # the full copyright notices and license terms.
 from trytond.pool import Pool
-from .magento_core import *
-from .product import *
+from . import magento_core
+from . import product
 
 def register():
     Pool.register(
-        MagentoApp,
-        MagentoManufacturer,
-        Product,
+        magento_core.MagentoApp,
+        magento_core.MagentoManufacturer,
+        product.Product,
         module='magento_manufacturer', type_='model')

@@ -6,8 +6,7 @@ from trytond.pool import Pool, PoolMeta
 __all__ = ['Product']
 
 
-class Product:
-    __metaclass__ = PoolMeta
+class Product(metaclass=PoolMeta):
     __name__ = "product.product"
 
     @classmethod
@@ -21,7 +20,7 @@ class Product:
             manufacturers = MagentoManufacturer.search([
                 ('value','=', manufacturer),
                 ], limit=1)
-        
+
             if manufacturers:
                 mgn_manufacturer, = manufacturers
                 vals['manufacturer'] = mgn_manufacturer.manufacturer
