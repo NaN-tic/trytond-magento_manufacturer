@@ -3,6 +3,9 @@
 # the full copyright notices and license terms.
 from trytond.model import ModelView, ModelSQL, fields
 from trytond.pool import Pool, PoolMeta
+from trytond.exceptions import UserError
+from trytond.i18n import gettext
+from trytond.exceptions import UserError
 from magento import *
 import logging
 
@@ -19,9 +22,6 @@ class MagentoApp(metaclass=PoolMeta):
     @classmethod
     def __setup__(cls):
         super(MagentoApp, cls).__setup__()
-        cls._error_messages.update({
-            'manufacturer_error': 'Not exist manufacturer attribute!',
-        })
         cls._buttons.update({
                 'core_manufacturer': {},
                 })
@@ -45,7 +45,7 @@ class MagentoApp(metaclass=PoolMeta):
                     attribute_options = product_attribute_api.options(
                         manufacturer)
                 except:
-                    self.raise_user_error('manufacturer_error')
+                    raise UserError(gettext('magento_manufacturer.smtp_test_details'))
 
                 for option in attribute_options:
                     partner = None
